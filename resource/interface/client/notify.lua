@@ -7,7 +7,6 @@
 ---@field title? string
 ---@field description? string
 ---@field duration? number
----@field showDuration? boolean
 ---@field position? NotificationPosition
 ---@field type? NotificationType
 ---@field style? { [string]: any }

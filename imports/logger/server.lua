@@ -1,3 +1,11 @@
+--[[
+    https://github.com/overextended/ox_lib
+
+    This file is licensed under LGPL-3.0 or higher <https://www.gnu.org/licenses/lgpl-3.0.en.html>
+
+    Copyright (c) 2025 Linden <https://github.com/thelindat/fivem>
+]]
+
 local service = GetConvar('ox:logger', 'datadog')
 local buffer
 local bufferSize = 0
@@ -243,7 +251,7 @@ if service == 'loki' then
         local timestamp = ('%s000000000'):format(os.time(os.date('*t')))
 
         -- Initializes values table with the message
-        local values = {}
+        local values = {message = message}
 
         -- Format the args into strings
         local tags = formatTags(source, ... and string.strjoin(',', string.tostringall(...)) or nil)
@@ -264,8 +272,7 @@ if service == 'loki' then
             values = {
                 {
                     timestamp,
-                    message,
-                    values
+                    json.encode(values)
                 }
             }
         }
